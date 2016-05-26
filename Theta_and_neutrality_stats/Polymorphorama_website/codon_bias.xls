@@ -1,0 +1,5 @@
+locus 		 S_freq>frquency_cutoff 	 divergence  	 singleton  	 doubleton  	 tripleton  
+T552_00034.merged_plus_outgroup.reordered.aln	 P->U		18	0	0	0	0
+T552_00034.merged_plus_outgroup.reordered.aln	 U->P		18	0	0	0	0
+T552_00034.merged_plus_outgroup.reordered.aln	 P->P		0	0	0	0	0
+T552_00034.merged_plus_outgroup.reordered.aln	 U->U		10	0	0	0	0
