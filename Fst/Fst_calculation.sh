@@ -904,6 +904,21 @@ bedtools groupby -i windows_pj_pm_fst_refPm.fermit.optimized.clean.tab -g 1,2,3,
 bedtools groupby -i windows_pj_pc_fst_refPm.fermit.optimized.clean.tab -g 1,2,3,4 -c 9 -o mean | tr "\:" "\t" > windows_pj_pc_fst_refPm.fermit.optimized.mean.tab
 bedtools groupby -i windows_pc_pm_fst_refPm.fermit.optimized.clean.tab -g 1,2,3,4 -c 9 -o mean | tr "\:" "\t" > windows_pc_pm_fst_refPm.fermit.optimized.mean.tab
 
+
+# PCA
+~/utils/vcftools_0.1.13/bin/vcftools \
+--vcf Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf \
+--plink --out Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf.raw
+
+#Make a .genome file
+~/utils/plink --file Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf.raw --genome --noweb --allow-no-sex \
+--out Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf.raw
+
+#Do some multidimensional scaling:
+~/utils/plink --file Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf.raw \
+-read-genome Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf.raw.genome --cluster --mds-plot 2 --noweb
+
+
 # plotting in R
 fst <- read.table("$WRKDIR/windows_pj_pc_fst_refPm.fermit.optimized.mean.tab",header=F,sep="\t")
 names(fst) <- c("chrom", "start", "end", "win_id","win_size", "avg_fst" )
@@ -933,4 +948,8 @@ ggplot(data=fst, aes(x=avg_fst)) +
   geom_density(fill=I("blue")) +
   facet_wrap(~win_size) +  geom_vline(xintercept=q,colour="black")
 
+d<-read.table("plink.txt",h=T)
+plot(d$C1,d$C2,  col=as.integer(d$FID), pch=19, xlab = "", ylab = "", axes = T, main = "PCA of Pneumocystis samples/plink (SNPs)")
+legend("topright", c("P.jirovecii", "P.carinii","P.murina"), pch=19, col=c(2,1,3))
+text(d$C1,d$C2, labels =  (d$IID), pos = 4)
 
