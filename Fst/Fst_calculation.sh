@@ -852,7 +852,6 @@ Pj_Z_2_PmB123.sorted.dr.bam \
 --stdout | ~/utils/vcftools_0.1.13/bin/vcftools --vcf - \
 --max-missing 0.5 \
 --min-alleles 2 --max-alleles 6 \
---min-alleles 0.01 \
 --recode \
 --stdout \
 > Pj_Pc_Pm_refPmurina.LAST_a15_b3.all_species.fermikit.flt.optimized.vcf
