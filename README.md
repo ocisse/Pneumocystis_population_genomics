@@ -1,8 +1,8 @@
 README
 
+
 Pneumocystis population genomics study
+	Population genomics statistics
 
-# Pneumocystis population genomics study
 
-## Population genomics statistics
 
